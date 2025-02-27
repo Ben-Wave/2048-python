@@ -4,7 +4,7 @@ Willkommen zu meinem 2048-Projekt! Dieses Spiel ist eine Python-Implementierung 
 
 ## Funktionen ✨
 
-- **Autoplay:** Drücke die Taste `A`, um das Spiel im Autoplay-Modus zu starten! Lass die KI für dich spielen und beobachte, wie sie strategisch Züge macht. 🤖
+- **Autoplay:** Drücke die Taste `a`, um das Spiel im Autoplay-Modus zu starten! Lass die KI für dich spielen und beobachte, wie sie strategisch Züge macht. 🤖
 - **Machine Learning:** Mit der Taste `i` kannst du das maschinelle Lernen aktivieren! Trainiere die KI, um besser im Spiel zu werden und die besten Strategien zu erlernen. 📈
 
 ## Installation 🛠️
