@@ -1,6 +1,8 @@
 import pygame
 import random
+import os
 from module.const import GameConfig
+from module.ai import AI2048
 
 class Game2048:
     def __init__(self):
@@ -8,6 +10,7 @@ class Game2048:
         # Logisches Raster: Zahl in jeder Zelle
         self.grid = [[0 for _ in range(self.config.GRID_SIZE)] for _ in range(self.config.GRID_SIZE)]
         self.score = 0
+        self.high_score_path = os.path.join("app_data", "highscore.txt")
         self.high_score = self._load_high_score()
         self.best_tile = 0  # Höchster Wert, der erreicht wurde
         self.game_over = False
@@ -29,22 +32,24 @@ class Game2048:
         # Zu Beginn zwei zufällige Kacheln
         self.add_new_tile()
         self.add_new_tile()
-
+        
+        # AI
+        self.ai = AI2048()
+        self.ai.load_model()
+        
     def _load_high_score(self):
-        """Lädt den Highscore aus einer Datei oder gibt 0 zurück, wenn keine existiert."""
+        """Lädt den Highscore aus der Datei app_data/highscore.txt oder gibt 0 zurück, falls nicht vorhanden."""
         try:
-            with open("highscore.txt", "r") as f:
+            with open(self.high_score_path, "r") as f:
                 return int(f.read().strip())
         except (FileNotFoundError, ValueError):
             return 0
 
     def _save_high_score(self):
-        """Speichert den aktuellen Highscore in einer Datei."""
-        try:
-            with open("highscore.txt", "w") as f:
-                f.write(str(self.high_score))
-        except(IOError):
-            print("Highscore konnte nicht gespeichert werden.")
+        """Speichert den aktuellen Highscore in der Datei app_data/highscore.txt."""
+        os.makedirs("app_data", exist_ok=True)  # Falls app_data nicht existiert, erstelle es
+        with open(self.high_score_path, "w") as f:
+            f.write(str(self.high_score))
 
     def add_new_tile(self):
         """Fügt an einer leeren Stelle eine 2 oder 4 hinzu und startet den Spawn-Effekt."""
@@ -557,3 +562,15 @@ class Game2048:
         
         if self.move(3):  # Links (3) als letzter Ausweg
             return
+        
+    def auto_ai_move(self):
+        """Lässt die KI das Spiel spielen."""
+        old_state = self.ai.get_state(self.grid)
+        action = self.ai.choose_action(self)
+        moved = self.move(action)
+
+        if moved:
+            reward = self.score  # Belohnung = aktuelle Punktzahl
+            new_state = self.ai.get_state(self.grid)
+            self.ai.update_q_table(old_state, action, reward, new_state)
+            self.ai.decay_exploration()  # Exploration reduzieren

@@ -170,5 +170,7 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# highscore.txt
-highscore.txt
+# Ignoriere alles im app_data-Ordner
+app_data/*
+# Ausnahme: lasse den app_data-Ordner selbst zu
+!app_data/
