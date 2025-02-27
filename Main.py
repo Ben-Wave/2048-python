@@ -43,6 +43,10 @@ class GameMain(GameConfig):
 
             self.game.update(dt)
             self.game.draw(self.screen)
+            # Zeichne den Hinweis für Autoplay
+            autoplay_text = self.game.config.font['extra_small'].render("Drücke 'A' für Autoplay", True, self.game.config.TEXT_COLOR_BRIGHT)
+            self.screen.blit(autoplay_text, (10, self.game.config.WINDOW_HEIGHT - 70))  # Positioniere den Text unterhalb der Statistik
+
             pygame.display.flip()
 
         pygame.quit()
