@@ -41,21 +41,21 @@ class AI2048:
         self.exploration_rate *= self.exploration_decay
         self.exploration_rate = max(0.01, self.exploration_rate)
 
-        def save_model(self):
-            """Speichert das Modell nur nach einem abgeschlossenen Spiel (kein ständiges Speichern mehr)."""
-            self.version += 1  # Versionsnummer erhöhen
-            filename = "ai_model.pkl"  # Überschreibt immer dieselbe Datei
-            with open(filename, "wb") as f:
-                pickle.dump(self.q_table, f)
-            
-            # Speichere Modellinfos mit Version
-            with open("model_info.txt", "w") as f:
-                f.write(f"Version: {self.version}\n")
-                f.write(f"Best Score: {self.best_score}\n")
-                f.write(f"Best Tile: {self.best_tile}\n")
-                f.write(f"Games Played: {self.games_played}\n")
-            
-            print(f"💾 Modell gespeichert als {filename} (Version {self.version})")
+    def save_model(self):
+        """Speichert das Modell nur nach einem abgeschlossenen Spiel (kein ständiges Speichern mehr)."""
+        self.version += 1  # Versionsnummer erhöhen
+        filename = "ai_model.pkl"  # Überschreibt immer dieselbe Datei
+        with open(filename, "wb") as f:
+            pickle.dump(self.q_table, f)
+        
+        # Speichere Modellinfos mit Version
+        with open("model_info.txt", "w") as f:
+            f.write(f"Version: {self.version}\n")
+            f.write(f"Best Score: {self.best_score}\n")
+            f.write(f"Best Tile: {self.best_tile}\n")
+            f.write(f"Games Played: {self.games_played}\n")
+        
+        print(f"💾 Modell gespeichert als {filename} (Version {self.version})")
 
     def load_model(self):
         """Lädt das bestehende Modell, falls vorhanden."""
