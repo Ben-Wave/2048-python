@@ -25,7 +25,7 @@ python main.py
 
 1. **Ziele:** Kombiniere Zahlen, um die höchste Zahl (2048) zu erreichen!
 2. **Steuerung:** Verwende die Pfeiltasten, um die Steine zu bewegen. Kombiniere gleiche Zahlen, um höhere Zahlen zu erstellen.
-3. **Autoplay:** Drücke `A`, um die KI das Spiel für dich spielen zu lassen.
+3. **Autoplay:** Drücke `a`, um die KI das Spiel für dich spielen zu lassen.
 4. **Machine Learning:** Drücke `i`, um das maschinelle Lernen zu starten und die KI zu trainieren.
 
 ## Über das Projekt 💡
