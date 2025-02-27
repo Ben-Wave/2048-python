@@ -1,4 +1,0 @@
-Version: 7
-Best Score: 3004
-Best Tile: 256
-Games Played: 11

@@ -44,12 +44,12 @@ class AI2048:
     def save_model(self):
         """Speichert das Modell nur nach einem abgeschlossenen Spiel (kein ständiges Speichern mehr)."""
         self.version += 1  # Versionsnummer erhöhen
-        filename = "ai_model.pkl"  # Überschreibt immer dieselbe Datei
+        filename = "app_data/ai_model.pkl"  # Speicherort im app_data-Ordner
         with open(filename, "wb") as f:
             pickle.dump(self.q_table, f)
         
         # Speichere Modellinfos mit Version
-        with open("model_info.txt", "w") as f:
+        with open("app_data/model_info.txt", "w") as f:  # Speicherort im app_data-Ordner
             f.write(f"Version: {self.version}\n")
             f.write(f"Best Score: {self.best_score}\n")
             f.write(f"Best Tile: {self.best_tile}\n")
