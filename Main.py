@@ -1,46 +1,51 @@
 import pygame
 from module.Gamemodule import Game2048
-from module.const import *
+from module.const import GameConfig
 
-def main():
-    pygame.init()
-    
-    # Fenster erstellen
-    screen = pygame.display.set_mode(WINDOW_SIZE)
-    pygame.display.set_caption("2048")
+class GameMain(GameConfig):
+    def __init__(self):
+        super().__init__()  # Initialisiere GameConfig
+        pygame.init()
+        self.screen = pygame.display.set_mode(self.WINDOW_SIZE)
+        pygame.display.set_caption("2048")
+        self.game = Game2048()
+        self.clock = pygame.time.Clock()
+        self.running = True
+        self.autoplay = False  # Autoplay standardmäßig deaktiviert
 
-    # Spiel-Objekt erstellen
-    game = Game2048()
-    
-    clock = pygame.time.Clock()
-    running = True
-
-    while running:
-        dt = clock.tick(60) / 1000  # Delta Time für Animationen
-        
+    def handle_events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
-            
+                self.running = False
             elif event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_UP:
-                    game.move(0)
+                    self.game.move(0)
                 elif event.key == pygame.K_RIGHT:
-                    game.move(1)
+                    self.game.move(1)
                 elif event.key == pygame.K_DOWN:
-                    game.move(2)
+                    self.game.move(2)
                 elif event.key == pygame.K_LEFT:
-                    game.move(3)
+                    self.game.move(3)
                 elif event.key == pygame.K_r:
-                    game.reset_game()
-                elif event.key == pygame.K_c and game.game_won:
-                    game.continue_game()
+                    self.game.reset_game()
+                elif event.key == pygame.K_c and self.game.game_won:
+                    self.game.continue_game()
+                elif event.key == pygame.K_a:
+                    self.autoplay = not self.autoplay
 
-        game.update(dt)
-        game.draw(screen)
-        pygame.display.flip()
+    def run(self):
+        while self.running:
+            dt = self.clock.tick(60) / 1000  
+            self.handle_events()
+            
+            if self.autoplay and not self.game.game_over:
+                self.game.auto_move()
 
-    pygame.quit()
+            self.game.update(dt)
+            self.game.draw(self.screen)
+            pygame.display.flip()
+
+        pygame.quit()
 
 if __name__ == "__main__":
-    main()
+    GameMain().run()

@@ -1,77 +1,72 @@
 import pygame
+class GameConfig:
+    def __init__(self):
+        pygame.init()
+        
+        # Farben
+        self.BACKGROUND_COLOR = (187, 173, 160)
+        self.EMPTY_CELL_COLOR = (205, 193, 180)
+        self.FONT_COLOR = (119, 110, 101)
+        self.TEXT_COLOR_BRIGHT = (249, 246, 242)
 
-# Initialisierung
-pygame.init()
+        # Farben für verschiedene Zahlen
+        self.TILE_COLORS = {
+            0: (205, 193, 180),
+            2: (238, 228, 218),
+            4: (237, 224, 200),
+            8: (242, 177, 121),
+            16: (245, 149, 99),
+            32: (246, 124, 95),
+            64: (246, 94, 59),
+            128: (237, 207, 114),
+            256: (237, 204, 97),
+            512: (237, 200, 80),
+            1024: (237, 197, 63),
+            2048: (237, 194, 46),
+            4096: (114, 177, 237),
+            8192: (97, 204, 237),
+            16384: (80, 200, 237),
+            32768: (63, 197, 237),
+            65536: (46, 194, 237),
+        }
 
-# Farben
-BACKGROUND_COLOR = (187, 173, 160)
-EMPTY_CELL_COLOR = (205, 193, 180)
-FONT_COLOR = (119, 110, 101)
-TEXT_COLOR_BRIGHT = (249, 246, 242)
+        # Spielkonstanten
+        self.GRID_SIZE = 4
+        self.CELL_SIZE = 100
+        self.CELL_MARGIN = 10
+        self.GRID_PADDING = 10
+        self.WINDOW_WIDTH = self.GRID_SIZE * (self.CELL_SIZE + self.CELL_MARGIN) + self.GRID_PADDING * 2
+        self.WINDOW_HEIGHT = self.WINDOW_WIDTH + 50
+        self.WINDOW_SIZE = (self.WINDOW_WIDTH, self.WINDOW_HEIGHT)
 
-# Farben für verschiedene Zahlen
-TILE_COLORS = {
-    0: (205, 193, 180),
-    2: (238, 228, 218),
-    4: (237, 224, 200),
-    8: (242, 177, 121),
-    16: (245, 149, 99),
-    32: (246, 124, 95),
-    64: (246, 94, 59),
-    128: (237, 207, 114),
-    256: (237, 204, 97),
-    512: (237, 200, 80),
-    1024: (237, 197, 63),
-    2048: (237, 194, 46),
-    # Zusätzliche Farben für höhere Werte
-    4096: (114, 177, 237),
-    8192: (97, 204, 237),
-    16384: (80, 200, 237),
-    32768: (63, 197, 237),
-    65536: (46, 194, 237)
-}
+        # Animationen
+        self.MOVE_ANIMATION_DURATION = 0.1  # Dauer der Bewegungsanimation in Sekunden
+        self.MERGE_ANIMATION_DURATION = 0.2  # Dauer der Merge-Animation in Sekunden
+        self.SPAWN_ANIMATION_DURATION = 0.15  # Dauer der Spawn-Animation in Sekunden
 
-# Textfarben (hell für dunkle Kacheln, dunkel für helle Kacheln)
-TEXT_COLORS = {
-    0: FONT_COLOR,
-    2: FONT_COLOR,
-    4: FONT_COLOR,
-    8: TEXT_COLOR_BRIGHT,
-    16: TEXT_COLOR_BRIGHT,
-    32: TEXT_COLOR_BRIGHT,
-    64: TEXT_COLOR_BRIGHT,
-    128: TEXT_COLOR_BRIGHT,
-    256: TEXT_COLOR_BRIGHT,
-    512: TEXT_COLOR_BRIGHT,
-    1024: TEXT_COLOR_BRIGHT,
-    2048: TEXT_COLOR_BRIGHT,
-    4096: TEXT_COLOR_BRIGHT,
-    8192: TEXT_COLOR_BRIGHT,
-    16384: TEXT_COLOR_BRIGHT,
-    32768: TEXT_COLOR_BRIGHT,
-    65536: TEXT_COLOR_BRIGHT
-}
-
-# Spielkonstanten
-GRID_SIZE = 4
-CELL_SIZE = 100
-CELL_MARGIN = 10
-GRID_PADDING = 10
-
-# Animationskonstanten
-SPAWN_ANIMATION_DURATION = 0.2  # Sekunden für den Spawn-Effekt
-MOVE_ANIMATION_DURATION = 0.15  # Sekunden für Bewegungsanimationen
-MERGE_ANIMATION_DURATION = 0.1  # Sekunden für Merge-Effekt
-
-# Fenstergröße
-WINDOW_WIDTH = GRID_SIZE * (CELL_SIZE + CELL_MARGIN) + GRID_PADDING * 2
-WINDOW_HEIGHT = WINDOW_WIDTH + 50  # Extra Platz für Punktestand und Highscore
-WINDOW_SIZE = (WINDOW_WIDTH, WINDOW_HEIGHT)
-
-# Fonts
-font = {
-    'small': pygame.font.SysFont('Arial', 36),
-    'medium': pygame.font.SysFont('Arial', 48),
-    'large': pygame.font.SysFont('Arial', 60),
-    'extra_small': pygame.font.SysFont('Arial', 24)  # Für sehr große Zahlen
-}
+        # Fonts
+        self.font = {
+            'small': pygame.font.SysFont('Arial', 36),
+            'medium': pygame.font.SysFont('Arial', 48),
+            'large': pygame.font.SysFont('Arial', 60),
+            'extra_small': pygame.font.SysFont('Arial', 24),
+        }
+        #Text_fonts
+        self.TEXT_COLORS = {
+            2: (119, 110, 101),
+            4: (119, 110, 101),
+            8: (249, 246, 242),
+            16: (249, 246, 242),
+            32: (249, 246, 242),
+            64: (249, 246, 242),
+            128: (249, 246, 242),
+            256: (249, 246, 242),
+            512: (249, 246, 242),
+            1024: (249, 246, 242),
+            2048: (249, 246, 242),
+            4096: (249, 246, 242),
+            8192: (249, 246, 242),
+            16384: (249, 246, 242),
+            32768: (249, 246, 242),
+            65536: (249, 246, 242),
+        }
