@@ -52,17 +52,15 @@ class GameMain(GameConfig):
                 self.game.auto_ai_move()
 
             if self.game.game_over:
-                if self.ai_play:
+                if self.ai_play:  # Nur wenn AI aktiv ist, soll das Spiel neu starten
                     self.game.ai.games_played += 1
                     if self.game.score > self.game.ai.best_score:
                         self.game.ai.best_score = self.game.score
                     if self.game.best_tile > self.game.ai.best_tile:
                         self.game.ai.best_tile = self.game.best_tile
 
-                    # Nur EINMAL speichern – nicht jede Sekunde!
-                    self.game.ai.save_model()
-
-                self.game.reset_game()
+                    self.game.ai.save_model()  # Nur einmal speichern
+                    self.game.reset_game()  # Nur hier resetten!
 
             self.game.update(dt_effective)
             self.game.draw(self.screen)
